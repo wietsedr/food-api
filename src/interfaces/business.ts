@@ -4,9 +4,11 @@ export interface business {
   url: string,
   price: string,
   rating: string,
+  review_count: string,
   phone: string,
   coordinates: {
     latitude: string,
     longitude: string,
   },
+  image_url: string,
 };

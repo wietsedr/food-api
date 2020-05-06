@@ -15,6 +15,8 @@ export const useSearch = (): [(searchTerm: string) => void, business[], string] 
     try {
       const response = await yelpApi.search(searchTerm, 'los angeles', 50);
 
+      console.log('searching for', searchTerm);
+
       if (response) {
         setResults(response.data.businesses);
         setErrorMessage('');

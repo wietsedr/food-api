@@ -16,7 +16,7 @@ export const SearchBar: FC<Props> = ({
 			autoCapitalize='none'
 			autoCorrect={false}
 			onChangeText={onTermChange}
-			onEndEditing={() => onTermSubmit}
+			onEndEditing={onTermSubmit}
 		/>
 	</View>
 );
@@ -24,7 +24,7 @@ export const SearchBar: FC<Props> = ({
 interface Props {
 	term: string;
 	onTermChange(term: string): void;
-	onTermSubmit(term: string): void;
+	onTermSubmit(): void;
 };
 
 const styles = StyleSheet.create({
