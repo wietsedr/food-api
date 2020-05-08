@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import { YelpApi } from '../api/YelpApi';
 import { yelpApiConfig } from '../api/YelpApi.config';
@@ -10,12 +10,12 @@ export const useBusiness = (): [
   business,
   string,
 ] => {
+  const yelpApi = useMemo(() => new YelpApi(yelpApiConfig), []);
   const [business, setBusiness] = useState<business | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const fetch = async (businessId: string): Promise<void> => {
     try {
-      const yelpApi = new YelpApi(yelpApiConfig);
       const response = await yelpApi.getBusiness(businessId);
   
       if (response) {
