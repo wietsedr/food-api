@@ -15,7 +15,7 @@ export const useSearch = (): [
 	const [results, setResults] = useState<business[]>([]);
 	const [errorMessage, setErrorMessage] = useState<string>("");
 
-	const onSearch = async (searchTerm: string): Promise<void> => {
+	const search = async (searchTerm: string): Promise<void> => {
 		try {
 			const response = await yelpApi.search(
 				searchTerm,
@@ -33,8 +33,8 @@ export const useSearch = (): [
 	};
 
 	useEffect(() => {
-		onSearch("pasta");
+		search("pasta");
 	}, []);
 
-	return [onSearch, results, errorMessage];
+	return [search, results, errorMessage];
 };

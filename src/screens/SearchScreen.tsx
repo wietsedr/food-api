@@ -9,7 +9,7 @@ import { business } from "../interfaces/business";
 
 const SearchScreen: FC = () => {
 	const [term, setTerm] = useState<string>("");
-	const [onSearch, results, errorMessage] = useSearch();
+	const [search, results, errorMessage] = useSearch();
 
 	const filterResultsByPrice = (price: string): business[] =>
 		results.filter((result) => result.price === price);
@@ -21,7 +21,7 @@ const SearchScreen: FC = () => {
 				onTermChange={(newTerm) => setTerm(newTerm)}
 				onTermSubmit={() => {
 					if (term !== "") {
-						onSearch(term);
+						search(term);
 					}
 				}}
 			/>

@@ -7,14 +7,17 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../types/navigation";
 import { business } from "../interfaces/business";
 
-import ResultsDetail from "./ResultsDetail";
+import ResultsCard from "./ResultsCard";
 
 const ResultsList: FC<Props> = ({ title, results, navigation }) => {
-	const navigateToDetail = (businessId: string) => {
-		navigation.navigate("Detail", {
-			businessId,
-		});
+	const navigateToDetail = (business: business) => {
+		const { id: businessId } = business;
+		navigation.navigate("Detail", { businessId });
 	};
+
+	if (!results.length) {
+		return null;
+	}
 
 	return (
 		<View style={styles.view}>
@@ -28,8 +31,8 @@ const ResultsList: FC<Props> = ({ title, results, navigation }) => {
 				decelerationRate={"fast"}
 				showsHorizontalScrollIndicator={false}
 				renderItem={({ item }) => (
-					<TouchableOpacity onPress={() => navigateToDetail(item.id)}>
-						<ResultsDetail business={item} />
+					<TouchableOpacity onPress={() => navigateToDetail(item)}>
+						<ResultsCard business={item} />
 					</TouchableOpacity>
 				)}
 			/>

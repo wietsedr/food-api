@@ -5,18 +5,18 @@ import { yelpApiConfig } from '../api/YelpApi.config';
 
 import { business } from "../interfaces/business";
 
-export const useBusinessById = (): [
+export const useBusiness = (): [
   (businessId: string) => void,
   business,
   string,
 ] => {
-  const [business, setBusiness] = useState<business>({});
+  const [business, setBusiness] = useState<business | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const fetch = async (businessId: string): Promise<void> => {
     try {
       const yelpApi = new YelpApi(yelpApiConfig);
-      const response = await yelpApi.getBusinessById(businessId);
+      const response = await yelpApi.getBusiness(businessId);
   
       if (response) {
         setBusiness(response.data);

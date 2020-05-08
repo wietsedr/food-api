@@ -11,4 +11,5 @@ export interface business {
     longitude: string,
   },
   image_url: string,
+  photos: [],
 };

@@ -1,4 +1,7 @@
 export type RootStackParamList = {
   Search: undefined;
-  Detail: { businessId: string };
+  Detail: {
+    title: string,
+    businessId: string,
+  };
 };

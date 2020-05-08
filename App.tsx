@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -9,7 +9,7 @@ import { RootStackParamList } from "./src/types/navigation";
 
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
-const App: React.FC = () => (
+const App: FC = () => (
 	<NavigationContainer>
 		<Navigator
 			initialRouteName='Search'

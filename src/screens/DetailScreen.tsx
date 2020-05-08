@@ -1,28 +1,34 @@
 import React, { FC, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
+import { useBusiness } from "../hooks/useBusiness";
+
 import { RootStackParamList } from "../types/navigation";
 
-import { useBusinessById } from "../hooks/useBusinessById";
-
-const DetailScreen: FC<Props> = ({ route }) => {
-	const [fetch, business, errorMessage] = useBusinessById();
-	const { businessId } = route.params;
+const DetailScreen: FC<Props> = ({ route, navigation: { setParams } }) => {
+	const [fetch, business, errorMessage] = useBusiness();
+	const { businessId, businessName } = route.params;
 
 	useEffect(() => {
 		fetch(businessId);
-
-		if (business) {
-			console.log("business", business);
-		}
+		setParams({ title: businessName });
 	}, [businessId]);
 
+	if (!business) return null;
+
 	return (
-		<View style={styles.viewStyles}>
-			<Text>Results Show</Text>
-			<Text>{errorMessage}</Text>
+		<View style={styles.view}>
+			<Text style={styles.title}>{business.name}</Text>
+			<FlatList
+				data={business.photos}
+				keyExtractor={(photo) => photo}
+				renderItem={({ item }) => (
+					<Image source={{ uri: item }} style={styles.image} />
+				)}
+			/>
+			{errorMessage !== "" && <Text>{errorMessage}</Text>}
 		</View>
 	);
 };
@@ -36,8 +42,17 @@ interface Props {
 }
 
 const styles = StyleSheet.create({
-	viewStyles: {
+	view: {
 		margin: 10,
+	},
+	title: {
+		marginBottom: 15,
+		fontSize: 18,
+		fontWeight: "bold",
+	},
+	image: {
+		width: 300,
+		height: 200,
 	},
 });
 
