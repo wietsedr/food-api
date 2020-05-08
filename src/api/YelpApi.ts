@@ -16,4 +16,8 @@ export class YelpApi {
       },
     });
   }
+
+  public getBusinessById (businessId: string): Promise<AxiosResponse> {
+    return this.api.get(`/${businessId}`);
+  }
 }

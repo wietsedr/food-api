@@ -1,11 +1,10 @@
 import React, { useState, FC } from "react";
 import { Text, ScrollView, StyleSheet } from "react-native";
 
-import { SearchBar } from "../components/SearchBar";
-import { ResultsList } from "../components/ResultsList";
+import SearchBar from "../components/SearchBar";
+import ResultsList from "../components/ResultsList";
 
 import { useSearch } from "../hooks/useSearch";
-
 import { business } from "../interfaces/business";
 
 const SearchScreen: FC = () => {
@@ -20,10 +19,16 @@ const SearchScreen: FC = () => {
 			<SearchBar
 				term={term}
 				onTermChange={(newTerm) => setTerm(newTerm)}
-				onTermSubmit={() => onSearch(term)}
+				onTermSubmit={() => {
+					if (term !== "") {
+						onSearch(term);
+					}
+				}}
 			/>
 			{errorMessage ? <Text>{errorMessage}</Text> : null}
-			<Text style={styles.txtResults}>We found {results.length} results</Text>
+			<Text style={styles.txtResults}>
+				We found {results.length} results
+			</Text>
 			<ScrollView style={styles.scrollView}>
 				<ResultsList
 					title='Cost effective'
@@ -48,9 +53,8 @@ const styles = StyleSheet.create({
 		paddingVertical: 5,
 	},
 	scrollView: {
-		marginBottom: 35,
 		paddingHorizontal: 5,
-	}
+	},
 });
 
 export default SearchScreen;

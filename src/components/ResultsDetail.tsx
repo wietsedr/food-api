@@ -3,7 +3,7 @@ import { View, Image, Text, StyleSheet } from "react-native";
 
 import { business } from "../interfaces/business";
 
-export const ResultsDetail: FC<Props> = ({ business }) => (
+const ResultsDetail: FC<Props> = ({ business }) => (
 	<View style={styles.view}>
 		<Image source={{ uri: business.image_url }} style={styles.image} />
 		<Text style={styles.title}>{business.name}</Text>
@@ -33,3 +33,5 @@ const styles = StyleSheet.create({
 		marginVertical: 5,
 	},
 });
+
+export default ResultsDetail;

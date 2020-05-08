@@ -3,8 +3,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import SearchScreen from "./src/screens/SearchScreen";
+import DetailScreen from "./src/screens/DetailScreen";
 
-const { Navigator, Screen } = createStackNavigator();
+import { RootStackParamList } from "./src/types/navigation";
+
+const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
 const App: React.FC = () => (
 	<NavigationContainer>
@@ -16,6 +19,7 @@ const App: React.FC = () => (
 			}}
 		>
 			<Screen name='Search' component={SearchScreen} />
+			<Screen name='Detail' component={DetailScreen} />
 		</Navigator>
 	</NavigationContainer>
 );
